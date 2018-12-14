@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -pedantic -O3 -mtune=native -march=native -lm   CMakeFiles/eval.dir/src/main.cpp.o CMakeFiles/eval.dir/src/Parser.cpp.o  -o eval 
