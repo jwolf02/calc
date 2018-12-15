@@ -44,10 +44,7 @@ int main(int argc, const char *argv[]) {
       if (argc > 2)
         std::cout << '(' << i << ") ";
 
-      ss << result;
-      std::string tmp;
-      ss >> tmp;
-      std::cout << Parser::remove_trailing_zeros(tmp) << std::endl;
+      std::cout << Parser::remove_trailing_zeros(std::to_string(result)) << std::endl;
     }
   } catch (std::runtime_error &err) {
     std::cerr  << "Error: " << err.what() << std::endl;
