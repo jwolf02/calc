@@ -9,19 +9,18 @@
 #include <sstream>
 
 static void print_help() {
-  std::cout << "Example usage: eval \"(5 + 2) * 12.2 / 99 - 0.05\"" << std::endl;
-  std::cout << "Operators:" << std::endl;
-  std::cout << "Add: +" << std::endl;
-  std::cout << "Sub: -" << std::endl;
-  std::cout << "Mul: *" << std::endl;
-  std::cout << "Div: /" << std::endl;
-  std::cout << "Braces: ()" << std::endl;
+  std::cout << "Example usage: eval \"(5 + 2) * sin(12.2) / (-99) - 0.05\"" << std::endl;
+  std::cout << "Functions and Operators:" << std::endl;
+  std::cout << "Basic arithmethic: {+, -, *, /, ^}" << std::endl;
+  std::cout << "Trigonometrics:    {sin, cos, tan}" << std::endl;
+  std::cout << "Miscellaneous:     {sqr, sqrt, cbrt, log, ln, exp}" << std::endl;
+  std::cout << "Constants:         {e, pi}" << std::endl;
 }
 
 int main(int argc, const char *argv[]) {
   if (argc < 2) {
     std::cout << "Usage: " << argv[0]
-              << " <arithmethic expression> (type -h for  help)" << std::endl;
+              << " <arithmethic expression> (type -h for help)" << std::endl;
     exit(1);
   } else if (std::string(argv[1]) == "-h") {
     print_help();
