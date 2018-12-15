@@ -8,7 +8,11 @@ set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} -Wall -pedantic -O3 -mtune=native -m
 set(SOURCES   src/main.cpp
               src/Parser.hpp
               src/Parser.cpp
-              src/print_stl.hpp)
+              src/print_stl.hpp
+              src/ShuntingYard.hpp
+              src/ShuntingYard.cpp
+              src/Calculator.hpp
+              src/Calculator.cpp)
 
 add_executable(eval ${SOURCES})
 target_include_directories(eval PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
