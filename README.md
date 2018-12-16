@@ -7,7 +7,7 @@ mkdir build
 cmake ..  
 make -j 4  
 make install (optional)  
-calc "(2 - 6) * exp(sqrt(pi)) / (7 * (-8.99))"
+calc "(2 - 6) * exp(sqrt(pi)) / (7 * (-8.99))"  
 calc "sqrt(exp(e))" "pi * (-16)^2"  
 
 ## Supported Functions  
