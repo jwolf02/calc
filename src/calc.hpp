@@ -4,10 +4,6 @@
 #include <vector>
 #include <string>
 
-namespace Calculator {
-
 double eval(const std::vector<std::string> &tokens);
-
-}
 
 #endif // __CALCULATOR_HPP

@@ -2,19 +2,20 @@
 #include <iomanip>
 #include <cstdlib>
 #include <string>
-#include <Parser.hpp>
-#include <print_stl.hpp>
-#include <ShuntingYard.hpp>
-#include <Calculator.hpp>
-#include <sstream>
+#include <shunting_yard.hpp>
+#include <str_utils.hpp>
+#include <token.hpp>
+#include <calc.hpp>
 
 static void print_help() {
   std::cout << "Example usage: eval \"(5 + 2) * sin(12.2) / (-99) - 0.05\"" << std::endl;
   std::cout << "Functions and Operators:" << std::endl;
-  std::cout << "Basic arithmethic: {+, -, *, /, ^}" << std::endl;
-  std::cout << "Trigonometrics:    {sin, cos, tan}" << std::endl;
-  std::cout << "Miscellaneous:     {sqr, sqrt, cbrt, log, ln, exp}" << std::endl;
-  std::cout << "Constants:         {e, pi}" << std::endl;
+  std::cout << "Basic arithmethic:  {+, -, *, /, ^, mod}" << std::endl;
+  std::cout << "Trigonometrics:     {sin, cos, tan, asin, acos, atan}" << std::endl;
+  std::cout << "Hyperbolics:        {sinh, cosh, tanh, asinh, acosh, atanh}" << std::endl;
+  std::cout << "Miscellaneous:      {sqr, sqrt, cbrt, log2, log10, ln, log, exp, min, max}" << std::endl;
+  std::cout << "Rounding functions: {ceil, floor, abs}" << std::endl;
+  std::cout << "Constants:          {e, pi}" << std::endl;
 }
 
 int main(int argc, const char *argv[]) {
@@ -28,22 +29,17 @@ int main(int argc, const char *argv[]) {
   }
 
   try {
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(10);
-
     for (int i = 1; i < argc; ++i) {
-      std::string expression(argv[i]);
-      expression = Parser::remove_whitespace(expression);
 
-      std::vector<std::string> tokens = Parser::tokenize(expression);
-      tokens = Parser::preprocess_negatives(tokens);
-      tokens = ShuntingYard::convert(tokens);
-
-      double result = Calculator::eval(tokens);
+      double result = eval(
+                        convert_to_rpn(
+                          preprocess(
+                            tokenize(argv[i])
+                          )));
       if (argc > 2)
         std::cout << '(' << i << ") ";
 
-      std::cout << Parser::remove_trailing_zeros(std::to_string(result)) << std::endl;
+      std::cout << postprocess(std::to_string(result)) << std::endl;
     }
   } catch (std::runtime_error &err) {
     std::cerr  << "Error: " << err.what() << std::endl;

@@ -1,5 +1,5 @@
 # calc
-Shell Calculator for simple arithmethic expressions  
+command line calculator for simple arithmethic expressions  
 
 ## Usage
 cd calc  
