@@ -31,7 +31,7 @@ std::vector<std::string> expression::preprocess_negatives(const std::vector<std:
     std::vector<std::string> tmp;
     tmp.reserve(tokens.size());
 
-    for (int i = 0; i < (int) tokens.size() && tokens.size() >= 2; ++i) {
+    for (int i = 0; i < (int) tokens.size(); ++i) {
         // decide whether '-' is subtraction or negation
         if ((i == 0 && tokens.front() == "-" && tokens.size() >= 2) ||
                 (i < ((int) tokens.size() - 1) && tokens[i] == "-" && (tokens[i - 1] == "(" || isOperator(tokens[i - 1])))) {

@@ -6,6 +6,7 @@
 #include <regex>
 #include <token.hpp>
 #include <expression.hpp>
+#include <print_stl.hpp>
 
 // compute result
 static double eval(const std::vector<std::string> &tokens) {
@@ -43,10 +44,11 @@ static double eval(const std::vector<std::string> &tokens) {
     }
   }
 
-  if (result.size() != 1)
+  if (result.size() != 1) {
     throw std::runtime_error("syntax error: remaining temporary on stack");
-  else
+  } else {
     return result.front();
+  }
 }
 
 double calc::evaluate(const std::string &expression) {
@@ -67,8 +69,9 @@ double calc::evaluate(const std::string &expression) {
   }
 
   // compute result
-  const double result = eval(expression::to_postfix(
-          expression::preprocess_negatives(tokens)));
+  tokens = expression::preprocess_negatives(tokens);
+  const double result = eval(expression::to_postfix(tokens));
+
 
   // if assignment
   if (!var_name.empty()) {
