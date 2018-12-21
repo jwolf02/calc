@@ -40,6 +40,7 @@ const std::unordered_map<std::string, op> operators = {
   {"max", [](double a, double b) { return a > b ? a : b; }},
   {"min", [](double a, double b) { return a < b ? a : b; }},
   {"log", [](double a, double b) { return a >= 0 and b >= 0 ? std::log(b) / std::log(a) : throw std::runtime_error("arithmetic error: negative operand in 'log()'"); }},
+  {"root", [](double a, double b) { return a >= 0 and b >= 0 ? std::pow(b, 1 / a) : throw std::runtime_error("arithmetic error: negative operand in 'root()'"); }},
   {"mod", [](double a, double b) { return b != 0 ? std::fmod(a, b) : throw std::runtime_error("arithmetic error: division by 0"); }}
 };
 

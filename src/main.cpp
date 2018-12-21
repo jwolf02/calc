@@ -7,13 +7,15 @@
 #include <expression.hpp>
 
 static void print_help() {
-  std::cout << "Usage: calc [expression [expression] ..]" << std::endl;
+  std::cout << "Usage: calc [expression [expression] ...]" << std::endl;
   std::cout << "Functions and Operators:" << std::endl;
   std::cout << "Basic arithmethic:  {+, -, *, /, ^, mod}" << std::endl;
-  std::cout << "Trigonometrics:     {sin, cos, tan, asin, acos, atan}" << std::endl;
-  std::cout << "Hyperbolics:        {sinh, cosh, tanh, asinh, acosh, atanh}" << std::endl;
-  std::cout << "Miscellaneous:      {sqr, sqrt, cbrt, log2, log10, ln, log, exp, min, max}" << std::endl;
-  std::cout << "Rounding functions: {ceil, floor, abs}" << std::endl;
+  std::cout << "Trigonometrics:     {sin(x), cos(x), tan(x), asin(x), acos(x), atan(x)}" << std::endl;
+  std::cout << "Hyperbolics:        {sinh(x), cosh(x), tanh(x), asinh(x), acosh(x), atanh(x)}" << std::endl;
+  std::cout << "Exponentials:       {sqr(x), sqrt(x), cbrt(x), root(n, x), exp(x)}" << std::endl;
+  std::cout << "Logarithms:         {log2(x), log10(x), ln(x), log(b, e)}" << std::endl;
+  std::cout << "Miscelleneous:      {min(a, b), max(a, b)}" << std::endl;
+  std::cout << "Rounding functions: {ceil(x), floor(x), abs(x), trunc(x)}" << std::endl;
   std::cout << "Constants:          {e, pi, inf}" << std::endl;
 }
 

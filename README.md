@@ -11,12 +11,23 @@ calc "(2 - 6) * exp(sqrt(pi)) / (7 * (-8.99))"
 calc "sqrt(exp(e))" "pi * (-16)^2"  
 
 ## Supported Functions  
-Basic arithmethic:  {+, -, *, /, ^, mod}  
-Trigonometrics:     {sin, cos, tan, asin, acos, atan}  
-Hyperbolics:        {sinh, cosh, tanh, asinh, acosh, atanh}  
-Miscellaneous:      {sqr, sqrt, cbrt, log2, log10, ln, log, exp, min, max}  
-Rounding functions: {ceil, floor, abs}  
-Constants:          {e, pi}  
+
+### Basic arithmethic    
++, -, *, /, ^, mod  
+### Trigonometrics     
+sin, cos, tan, asin, acos, atan  
+### Hyperbolics        
+sinh, cosh, tanh, asinh, acosh, atanh  
+### Exponentials        
+sqr, sqrt, cbrt, root, exp  
+### Logarithms
+log2, log10, ln, log
+### Miscelleneous
+min, max
+### Rounding functions 
+ceil, floor, abs, trunc  
+### Constants         
+e, pi, inf  
 
 ## Features
 
