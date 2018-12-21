@@ -17,9 +17,7 @@ bool isFunction(const std::string &token);
 
 bool isNumber(const std::string &token);
 
-bool isConstant(const std::string &token);
-
-double to_double(const std::string &token);
+bool isVariable(const std::string &token);
 
 int precedence(const std::string &token);
 
@@ -29,6 +27,6 @@ extern const std::unordered_map<std::string, func> functions;
 
 extern const std::unordered_map<std::string, op> operators;
 
-extern const std::unordered_map<std::string, std::string> constants;
+extern std::unordered_map<std::string, double> variables;
 
 #endif // __TOKEN_HPP

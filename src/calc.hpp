@@ -1,9 +1,13 @@
 #ifndef __CALCULATOR_HPP
 #define __CALCULATOR_HPP
 
-#include <vector>
 #include <string>
 
-double eval(const std::vector<std::string> &tokens);
+namespace calc {
+
+    // evaluate the expression given in postfix notation with preprocessed negatives
+    double evaluate(const std::string &expression);
+
+}
 
 #endif // __CALCULATOR_HPP
