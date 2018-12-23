@@ -15,18 +15,17 @@ static void print_help() {
   std::cout << "Logarithms:         log2(x), log10(x), ln(x), log(b, e)" << std::endl;
   std::cout << "Miscelleneous:      min(a, b), max(a, b)" << std::endl;
   std::cout << "Rounding functions: ceil(x), floor(x), abs(x), trunc(x)" << std::endl;
-  std::cout << "Combinatorics:      !, binomial(n, k)" << std::endl;
+  std::cout << "Combinatorics:      n!, binomial(n, k)" << std::endl;
   std::cout << "Constants:          e, pi, inf" << std::endl;
 }
 
 static std::string strip_trailing_zeros(const std::string &result) {
     std::string str;
-    std::size_t found;
-    if ((found = result.find('.')) != std::string::npos) {
+    if (result.find('.') != std::string::npos) {
         int i = (int) result.size() - 1;
         while (i >= 0 and result[i] == '0')
             --i;
-        str = result[i] == '.' ? result.substr(0, i) : result.substr(0, i + 1);
+        str = result[i] == '.' ? result.substr(0, (unsigned long) i) : result.substr(0, (unsigned long) i + 1);
     } else {
         str = result;
     }
@@ -43,9 +42,9 @@ static std::string to_string(double r) {
 }
 
 int main(int argc, const char *argv[]) {
-  if (argc > 1 && std::string(argv[1]) == "--help") {
+  if (argc > 1 && (std::string(argv[1]) == "--help" || std::string(argv[1]) == "-h")) {
     print_help();
-    exit(0);
+    exit(EXIT_SUCCESS);
   }
 
   // batch mode
@@ -53,7 +52,7 @@ int main(int argc, const char *argv[]) {
     for (int i = 1; i < argc; ++i) {
       try {
         if (argc > 2)
-          std::cout << "(" << i << ") ";
+          std::cout << '(' << i << ") ";
         std::cout << to_string(calc::evaluate(argv[i])) << std::endl;
       } catch (std::runtime_error &err) {
         std::cerr << err.what() << std::endl;
@@ -88,5 +87,5 @@ int main(int argc, const char *argv[]) {
     }
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }

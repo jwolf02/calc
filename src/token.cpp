@@ -11,7 +11,7 @@ using namespace token;
 static double factorial(double a) {
   // only positive integer values are allowed
   if (a - std::trunc(a) != 0 || a < 0)
-    ARITHMETIC_ERROR("factorial has to be called with positive integral argument");
+    ARITHMETIC_ERROR("factorial() has to be called with positive integral argument");
 
   // factorial of numbers greater than 22 cannot be represented in 64 bit doubles
   if (a > 22)
@@ -96,7 +96,10 @@ double token::get_variable(const std::string &token) {
 }
 
 void token::add_variable(const std::string &token, double val) {
-  variables[token] = val;
+  if (token == "e" or token == "pi" or token == "inf")
+    throw std::runtime_error("error: '" + token +"' cannot be assigned");
+  else
+    variables[token] = val;
 }
 
 bool token::is_number(const std::string &token) {
