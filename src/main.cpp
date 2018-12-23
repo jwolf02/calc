@@ -4,7 +4,6 @@
 #include <string>
 #include <calc.hpp>
 #include <sstream>
-#include <expression.hpp>
 
 static void print_help() {
   std::cout << "Usage: calc [expression [expression] ...]" << std::endl;

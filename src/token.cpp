@@ -5,7 +5,7 @@
 #include <string>
 #include <cmath>
 
-const std::unordered_map<std::string, func> functions = {
+const static std::unordered_map<std::string, func> functions = {
   {"sin", [](double a) { return std::sin(a); }},
   {"cos", [](double a) { return std::cos(a); }},
   {"tan", [](double a) { return std::tan(a); }},
@@ -31,7 +31,7 @@ const std::unordered_map<std::string, func> functions = {
   {"atanh", [](double a) { return std::atanh(a); }}
 };
 
-const std::unordered_map<std::string, op> operators = {
+const static std::unordered_map<std::string, op> operators = {
   {"+", [](double a, double b) { return a + b; }},
   {"-", [](double a, double b) { return a - b; }},
   {"*", [](double a, double b) { return a * b; }},
@@ -44,7 +44,7 @@ const std::unordered_map<std::string, op> operators = {
   {"mod", [](double a, double b) { return b != 0 ? std::fmod(a, b) : throw std::runtime_error("arithmetic error: division by 0"); }}
 };
 
-std::unordered_map<std::string, double> variables = {
+static std::unordered_map<std::string, double> variables = {
   {"pi", M_PI},
   {"e", M_E},
   {"inf", INFINITY}
@@ -56,6 +56,22 @@ bool isOperator(const std::string &token) {
 
 bool isFunction(const std::string &token) {
   return functions.find(token) != functions.end();
+}
+
+func getFunction(const std::string &token) {
+  return (*functions.find(token)).second;
+}
+
+op getOperator(const std::string &token) {
+  return (*operators.find(token)).second;
+}
+
+double getVariable(const std::string &token) {
+  return (*variables.find(token)).second;
+}
+
+void addVariable(const std::string &token, double val) {
+  variables[token] = val;
 }
 
 bool isNumber(const std::string &token) {

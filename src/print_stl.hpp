@@ -1,6 +1,8 @@
 #ifndef __PRINT_STL_HPP
 #define __PRINT_STL_HPP
 
+// Header library to faciliate the output of STL containers
+
 #include <iostream>
 #include <vector>
 #include <list>

@@ -15,6 +15,14 @@ bool isOperator(const std::string &token);
 
 bool isFunction(const std::string &token);
 
+func getFunction(const std::string &token);
+
+op getOperator(const std::string &token);
+
+double getVariable(const std::string &token);
+
+void addVariable(const std::string &token, double val);
+
 bool isNumber(const std::string &token);
 
 bool isVariable(const std::string &token);
@@ -22,11 +30,5 @@ bool isVariable(const std::string &token);
 int precedence(const std::string &token);
 
 int associativity(const std::string &token);
-
-extern const std::unordered_map<std::string, func> functions;
-
-extern const std::unordered_map<std::string, op> operators;
-
-extern std::unordered_map<std::string, double> variables;
 
 #endif // __TOKEN_HPP
