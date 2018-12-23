@@ -9,13 +9,14 @@ static void print_help() {
   std::cout << "Usage: calc [expression [expression] ...]" << std::endl;
   std::cout << "Functions and Operators:" << std::endl;
   std::cout << "Basic arithmethic:  +, -, *, /, ^, mod" << std::endl;
-  std::cout << "Trigonometrics:     sin(x), cos(x), tan(x), asin(x), acos(x), atan(x)" << std::endl;
+  std::cout << "Trigonometrics:     sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), cot(a)" << std::endl;
   std::cout << "Hyperbolics:        sinh(x), cosh(x), tanh(x), asinh(x), acosh(x), atanh(x)" << std::endl;
   std::cout << "Exponentials:       sqr(x), sqrt(x), cbrt(x), root(n, x), exp(x)" << std::endl;
   std::cout << "Logarithms:         log2(x), log10(x), ln(x), log(b, e)" << std::endl;
-  std::cout << "Miscelleneous:      min(a, b), max(a, b)" << std::endl;
+  std::cout << "Miscelleneous:      min(a, b), max(a, b), sign(x), hypot(x, y)" << std::endl;
   std::cout << "Rounding functions: ceil(x), floor(x), abs(x), trunc(x)" << std::endl;
   std::cout << "Combinatorics:      n!, binomial(n, k)" << std::endl;
+  std::cout << "Circle and Ball:    circumference(r), circle_area(r), ball_volume(r), ball_surface(r)" << std::endl;
   std::cout << "Constants:          e, pi, inf" << std::endl;
 }
 

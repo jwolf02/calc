@@ -15,19 +15,21 @@ calc "sqrt(exp(e))" "pi * (-16)^2"
 ### Basic arithmethic    
 +, -, *, /, ^, mod  
 ### Trigonometrics     
-sin, cos, tan, asin, acos, atan  
+sin, cos, tan, asin, acos, atan, cot  
 ### Hyperbolics        
 sinh, cosh, tanh, asinh, acosh, atanh  
 ### Exponentials        
-sqr, sqrt, cbrt, root, exp  
-### Logarithms
-log2, log10, ln, log
-### Miscelleneous
-min, max
-### Rounding functions 
+sqr, sqrt, cbrt, root, exp    
+### Logarithms  
+log2, log10, ln, log  
+### Miscelleneous  
+min, max, sign, hypot  
+### Rounding functions  
 ceil, floor, abs, trunc
-### Cobinatorics
+### Cobinatorics  
 !, binomial  
+### Circle and Ball
+circumference, circle_area, ball_volume, ball_surface  
 ### Constants         
 e, pi, inf  
 
