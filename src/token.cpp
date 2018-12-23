@@ -4,17 +4,31 @@
 #include <functional>
 #include <string>
 #include <cmath>
+#include <error.hpp>
+
+using namespace token;
+
+static double factorial(double a) {
+  if (a - std::trunc(a) != 0 || a < 0)
+    ARITHMETIC_ERROR("factorial has to be called with positive integral argument");
+
+  unsigned long long val = 1;
+  for (unsigned long long i = 1; i <= (unsigned long long) a; ++i)
+    val *= i;
+
+  return (double) val;
+}
 
 const static std::unordered_map<std::string, func> functions = {
   {"sin", [](double a) { return std::sin(a); }},
   {"cos", [](double a) { return std::cos(a); }},
   {"tan", [](double a) { return std::tan(a); }},
-  {"sqrt", [](double a) { return a >= 0 ? std::sqrt(a) : throw std::runtime_error("arithmetic error: negative operand in 'sqrt()'"); }},
+  {"sqrt", [](double a) { return a >= 0 ? std::sqrt(a) : ARITHMETIC_ERROR("negative operand in 'sqrt()'"); }},
   {"cbrt", [](double a) { return std::cbrt(a); }},
   {"sqr", [](double a) { return a * a; }},
-  {"log2", [](double a) { return a >= 0 ? std::log2(a) : throw std::runtime_error("arithmetic : negative operand in 'log2()'"); }},
-  {"log10", [](double a) { return a >= 0 ? std::log10(a) : throw std::runtime_error("arithmetic error: negative operand in 'log10()'"); }},
-  {"ln", [](double a) { return a >= 0 ? std::log(a) : throw std::runtime_error("arithmetic error: negative operand in 'ln()'"); }},
+  {"log2", [](double a) { return a >= 0 ? std::log2(a) : ARITHMETIC_ERROR("negative operand in 'log2()'"); }},
+  {"log10", [](double a) { return a >= 0 ? std::log10(a) : ARITHMETIC_ERROR("negative operand in 'log10()'"); }},
+  {"ln", [](double a) { return a >= 0 ? std::log(a) : ARITHMETIC_ERROR("negative operand in 'ln()'"); }},
   {"exp", [](double a) { return std::exp(a); }},
   {"asin", [](double a) { return std::asin(a); }},
   {"acos", [](double a) { return std::acos(a); }},
@@ -28,20 +42,22 @@ const static std::unordered_map<std::string, func> functions = {
   {"trunc", [](double a) { return std::trunc(a); }},
   {"asinh", [](double a) { return std::asinh(a); }},
   {"acosh", [](double a) { return std::acosh(a); }},
-  {"atanh", [](double a) { return std::atanh(a); }}
+  {"atanh", [](double a) { return std::atanh(a); }},
+  {"!", [](double a) { return factorial(a); }}
 };
 
 const static std::unordered_map<std::string, op> operators = {
   {"+", [](double a, double b) { return a + b; }},
   {"-", [](double a, double b) { return a - b; }},
   {"*", [](double a, double b) { return a * b; }},
-  {"/", [](double a, double b) { return b != 0.0 ? a / b : throw std::runtime_error("arithmetic error: division by 0"); }},
+  {"/", [](double a, double b) { return b != 0.0 ? a / b : ARITHMETIC_ERROR("division by 0"); }},
   {"^", [](double a, double b) { return std::pow(a, b); }},
   {"max", [](double a, double b) { return a > b ? a : b; }},
   {"min", [](double a, double b) { return a < b ? a : b; }},
-  {"log", [](double a, double b) { return a >= 0 and b >= 0 ? std::log(b) / std::log(a) : throw std::runtime_error("arithmetic error: negative operand in 'log()'"); }},
-  {"root", [](double a, double b) { return a >= 0 and b >= 0 ? std::pow(b, 1 / a) : throw std::runtime_error("arithmetic error: negative operand in 'root()'"); }},
-  {"mod", [](double a, double b) { return b != 0 ? std::fmod(a, b) : throw std::runtime_error("arithmetic error: division by 0"); }}
+  {"log", [](double a, double b) { return a >= 0 and b >= 0 ? std::log(b) / std::log(a) : ARITHMETIC_ERROR("negative operand in 'log()'"); }},
+  {"root", [](double a, double b) { return a >= 0 and b >= 0 ? std::pow(b, 1 / a) : ARITHMETIC_ERROR("negative operand in 'root()'"); }},
+  {"mod", [](double a, double b) { return b != 0 ? std::fmod(a, b) : ARITHMETIC_ERROR("division by 0"); }},
+  {"binomial", [](double a, double b) { return a >= b ? factorial(a) / (factorial(b) * factorial(a - b)) : ARITHMETIC_ERROR("n must be greater or equal to k"); }}
 };
 
 static std::unordered_map<std::string, double> variables = {
@@ -50,47 +66,47 @@ static std::unordered_map<std::string, double> variables = {
   {"inf", INFINITY}
 };
 
-bool isOperator(const std::string &token) {
+bool token::is_operator(const std::string &token) {
   return operators.find(token) != operators.end();
 }
 
-bool isFunction(const std::string &token) {
+bool token::is_function(const std::string &token) {
   return functions.find(token) != functions.end();
 }
 
-func getFunction(const std::string &token) {
+func token::get_function(const std::string &token) {
   return (*functions.find(token)).second;
 }
 
-op getOperator(const std::string &token) {
+op token::get_operator(const std::string &token) {
   return (*operators.find(token)).second;
 }
 
-double getVariable(const std::string &token) {
+double token::get_variable(const std::string &token) {
   return (*variables.find(token)).second;
 }
 
-void addVariable(const std::string &token, double val) {
+void token::add_variable(const std::string &token, double val) {
   variables[token] = val;
 }
 
-bool isNumber(const std::string &token) {
+bool token::is_number(const std::string &token) {
   const static std::regex number("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?");
   return std::regex_match(token, number);
 }
 
-bool isVariable(const std::string &token) {
+bool token::is_variable(const std::string &token) {
   return variables.find(token) != variables.end();
 }
 
-int precedence(const std::string &token) {
+int token::precedence(const std::string &token) {
   if (token == "+" or token == "-") {
     return 2;
   } else if (token == "*" or token == "/") {
     return 3;
   } else if (token == "^") {
     return 4;
-  } else if (isFunction(token)) {
+  } else if (is_function(token)) {
     return 5;
   } else if (token == "!") {
     return 6;
@@ -99,7 +115,7 @@ int precedence(const std::string &token) {
   }
 }
 
-int associativity(const std::string &token) {
+int token::associativity(const std::string &token) {
   if (token == "^")
     return RIGHT;
   else

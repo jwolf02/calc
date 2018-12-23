@@ -8,27 +8,31 @@
 #define LEFT  0
 #define RIGHT 1
 
-typedef std::function<double (double)> func;
-typedef std::function<double (double, double)> op;
+namespace token {
 
-bool isOperator(const std::string &token);
+    typedef std::function<double(double)> func;
+    typedef std::function<double(double, double)> op;
 
-bool isFunction(const std::string &token);
+    bool is_operator(const std::string &token);
 
-func getFunction(const std::string &token);
+    bool is_function(const std::string &token);
 
-op getOperator(const std::string &token);
+    func get_function(const std::string &token);
 
-double getVariable(const std::string &token);
+    op get_operator(const std::string &token);
 
-void addVariable(const std::string &token, double val);
+    double get_variable(const std::string &token);
 
-bool isNumber(const std::string &token);
+    void add_variable(const std::string &token, double val);
 
-bool isVariable(const std::string &token);
+    bool is_number(const std::string &token);
 
-int precedence(const std::string &token);
+    bool is_variable(const std::string &token);
 
-int associativity(const std::string &token);
+    int precedence(const std::string &token);
+
+    int associativity(const std::string &token);
+
+}
 
 #endif // __TOKEN_HPP

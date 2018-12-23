@@ -7,6 +7,7 @@ set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} -Wall -pedantic -O3 -mtune=native -m
 
 set(SOURCES   src/main.cpp
               src/print_stl.hpp
+              src/error.hpp
               src/calc.hpp
               src/calc.cpp
               src/token.hpp

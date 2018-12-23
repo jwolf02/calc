@@ -1,5 +1,5 @@
 # calc
-Command line calculator for simple arithmethic expressions written in C++.  
+Command line calculator written in C++ for simple arithmethic expressions.  
 
 ## Usage
 cd calc  
@@ -25,12 +25,13 @@ log2, log10, ln, log
 ### Miscelleneous
 min, max
 ### Rounding functions 
-ceil, floor, abs, trunc  
+ceil, floor, abs, trunc
+### Cobinatorics
+!, binomial  
 ### Constants         
 e, pi, inf  
 
 ## Features
-
 
 ### Batch mode 
 $ calc "(1 + 2)" "2 * 7 - 1"  
@@ -49,4 +50,17 @@ $ calc
 4  
 \> sqrt(x)  
 2  
+\> quit  
+
+### Repeat
+'!!' repeats the last entered command
+$ calc  
+\> x = 1  
+1  
+\> x = x + 1  
+2  
+\> !!  
+3  
+\> !!  
+4  
 \> quit  
