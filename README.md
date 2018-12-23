@@ -53,7 +53,7 @@ $ calc
 \> quit  
 
 ### Repeat
-'!!' repeats the last entered command
+'!!' repeats the last entered command  
 $ calc  
 \> x = 1  
 1  
