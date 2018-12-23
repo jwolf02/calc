@@ -9,14 +9,23 @@
 using namespace token;
 
 static double factorial(double a) {
+  // only positive integer values are allowed
   if (a - std::trunc(a) != 0 || a < 0)
     ARITHMETIC_ERROR("factorial has to be called with positive integral argument");
 
-  unsigned long long val = 1;
-  for (unsigned long long i = 1; i <= (unsigned long long) a; ++i)
-    val *= i;
+  // factorial of numbers greater than 22 cannot be represented in 64 bit doubles
+  if (a > 22)
+    ARITHMETIC_ERROR("factorials larger than 22 cannot be computed");
 
-  return (double) val;
+  // lookup value instead of computing it
+  static const double lookup_table[] = {
+          1.0, 1.0, 2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0, 362880.0, 3628800.0, 39916800.0,
+          479001600.0, 6227020800.0, 87178291200.0, 1307674368000.0, 20922789888000.0,
+          355687428096000.0, 6402373705728000.0, 121645100408832000.0, 2432902008176640000.0,
+          51090942171709440000.0, 1124000727777607680000.0
+  };
+
+  return lookup_table[(unsigned) a];
 }
 
 const static std::unordered_map<std::string, func> functions = {
